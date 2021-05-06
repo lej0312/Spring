@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycom.Person">
+<sql id="search">
+	<where> <!-- 동적sql  -->
+		<if test="word!=null and field=='name'">
+			name like CONCAT('%', #{word}, '%')
+		</if>
+		<if test="word!=null and field=='job'">
+			job like CONCAT('%', #{word}, '%')
+		</if>
+	</where>
+</sql>
+
+<!-- 추가 -->
+<insert id="insertPerson" parameterType="com.mycom.vo.PersonVO">
+insert into person values(#{id}, #{name}, #{password}, #{gender}, #{job})
+</insert>
+
+<!-- 전체보기 -->
+<select id="allPerson" resultType="com.mycom.vo.PersonVO">
+select * from person
+</select>
+
+<!-- 전체보기(검색 포함) -->
+<select id="listPerson" parameterType="java.util.Map" 
+resultType="com.mycom.vo.PersonVO">
+select * from person
+<include refid="search"/>
+</select>
+
+<!-- 전체 개수  -->
+<select id="allCount" resultType="int">
+select count(*) from person
+</select>
+
+<!-- 전체 개수(검색 포함)  -->
+<select id="countPerson" parameterType="java.util.Map" resultType="int">
+select count(*) from person
+<include refid="search"/>
+</select>
+
+<!-- 상세보기  -->
+<select id="viewPerson" resultType="com.mycom.vo.PersonVO" parameterType="String">
+select * from person where id = #{id}
+</select>
+
+<!-- 삭제  -->
+<delete id="deletePerson" parameterType="String">
+delete from person where id = #{id}
+</delete>
+
+<!-- 업데이트 -->
+<update id="updatePerson" parameterType="com.mycom.vo.PersonVO">
+update person set name = #{name}, password = #{password}, job = #{job} where id = #{id}
+</update>
+
+</mapper>
