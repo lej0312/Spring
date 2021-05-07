@@ -13,20 +13,22 @@ public class GuestDAOImpl implements GuestDAO{
 	@Autowired
 	private GuestMapper mapper;
 	
+	//입력
 	@Override
 	public void dao_guestInsert(GuestDTO guest) {
 		mapper.insert(guest);
 	}
 
+	//전체보기
 	@Override
 	public List<GuestDTO> dao_gusetList(HashMap<String, String> hm) {
 		return mapper.list(hm);
 	}
 
+	//상세보기
 	@Override
 	public GuestDTO dao_findByNum(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.findByNum(num);
 	}
 
 	@Override
@@ -35,16 +37,17 @@ public class GuestDAOImpl implements GuestDAO{
 		
 	}
 
+	//삭제
 	@Override
 	public void dao_guestDelete(int num) {
-		// TODO Auto-generated method stub
+		mapper.delete(num);
 		
 	}
 
+	//개수
 	@Override
 	public int dao_guestCount(HashMap<String, String> hm) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.count(hm);
 	}
 
 }

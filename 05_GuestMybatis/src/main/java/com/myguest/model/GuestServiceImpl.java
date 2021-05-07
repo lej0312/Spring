@@ -28,8 +28,7 @@ public class GuestServiceImpl implements GuestService {
 	//
 	@Override
 	public GuestDTO findByNum(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.dao_findByNum(num);
 	}
 
 	@Override
@@ -38,16 +37,17 @@ public class GuestServiceImpl implements GuestService {
 		
 	}
 
+	//삭제
 	@Override
 	public void guestDelete(int num) {
-		// TODO Auto-generated method stub
+		dao.dao_guestDelete(num);
 		
 	}
 
+	//개수
 	@Override
 	public int guestCount(HashMap<String, String> hm) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.dao_guestCount(hm);
 	}
 
 }
